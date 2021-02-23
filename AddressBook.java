@@ -28,7 +28,8 @@ public class AddressBook
 	}
 	
 	//Edit Person's Details
-	static PersonDetails editPersonDetails(PersonDetails pd) {
+	static PersonDetails editPersonDetails(PersonDetails pd)
+	{
 		Scanner in = new Scanner(System.in);
 
 		System.out.println("Enter the Address : ");
@@ -42,8 +43,14 @@ public class AddressBook
 		System.out.println("Enter the contact number...");
 		pd.phoneNumber = in.next();
 		return pd;
-
 	}
+	
+	//Delete Person's Details
+	static PersonDetails deletePersonDetails(PersonDetails pd)
+	{
+			return null;
+	}
+	
 	public static void main(String args[])
 	{
 		PersonDetails pd = getDataFromConsole();
@@ -52,7 +59,7 @@ public class AddressBook
 		 while(true)
 		 {
 			Scanner in = new Scanner(System.in);
-			System.out.println("Enter your choice \n 1: For Adding person \n 2:For Editing person's details");
+			System.out.println("Enter your choice \n 1: For Adding person \n 2:For Editing person's details \n 3:For Deleting person's details \n 4:Display the result ");
 			mychoice = in.nextInt();
 			switch (mychoice)
 			{
@@ -66,7 +73,20 @@ public class AddressBook
 					if(fName.equals(pd.firstname))
 						pd = editPersonDetails(pd);
 					else
-						System.out.println(fName + " First name is no valid ");
+						System.out.println(fName + " First name is not valid ");
+					System.out.println(pd);
+					break;
+					
+				case 3:
+					System.out.println("Enter the person's First name : ");
+					String fName1 = in.next();
+					if(fName1.equals(pd.firstname))
+						pd = deletePersonDetails(pd);
+					else
+						System.out.println(fName1 + " First name is not valid ");
+					break;
+					
+				case 4:
 					System.out.println(pd);
 					break;
 				default:
