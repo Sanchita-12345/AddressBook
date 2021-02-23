@@ -1,14 +1,23 @@
 package pack2;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.*;
 
 public class AddressBook
 {
+	
+	ArrayList<PersonDetails> a1 = null;
+	AddressBook()
+	{
+		a1 = new ArrayList();
+	}
+	
+	Scanner in = new Scanner(System.in);
+	static PersonDetails pd = null;
+	
 	//Add contacts
-	static PersonDetails getDataFromConsole() {
-		
-		Scanner in = new Scanner(System.in);
-		
+	public void getDataFromConsole() {
+				
 		System.out.println("Enter the First name : ");
 		String firstname = in.next();
 		System.out.println("Enter the Last name : ");
@@ -24,13 +33,12 @@ public class AddressBook
 		System.out.println("Enter the contact number : ");
 		String phoneNumber = in.next();
 
-		return new PersonDetails(firstname, lastname, address, city, state, pin, phoneNumber);
+		a1.add(new PersonDetails(firstname, lastname, address, city, state, pin, phoneNumber));
 	}
 	
 	//Edit Person's Details
-	static PersonDetails editPersonDetails(PersonDetails pd)
+	public void editPersonDetails(PersonDetails pd)
 	{
-		Scanner in = new Scanner(System.in);
 
 		System.out.println("Enter the Address : ");
 		pd.address = in.next();
@@ -42,53 +50,74 @@ public class AddressBook
 		pd.pin = in.next();
 		System.out.println("Enter the contact number...");
 		pd.phoneNumber = in.next();
-		return pd;
 	}
 	
 	//Delete Person's Details
-	static PersonDetails deletePersonDetails(PersonDetails pd)
+	public void deletePersonDetails(PersonDetails pd)
 	{
-			return null;
+		String fName1 = in.next();
+		ArrayList<PersonDetails> personlist1 = a1;
+		for (int i=0; i<personlist1.size(); i++)
+		{
+			if(personlist1.get(i).firstname.equals(fName1))
+			{
+				personlist1.remove(i);
+			}
+		}
 	}
 	
 	public static void main(String args[])
 	{
-		PersonDetails pd = getDataFromConsole();
+		AddressBook abook = new AddressBook();
 		int mychoice;
 		
 		 while(true)
 		 {
 			Scanner in = new Scanner(System.in);
-			System.out.println("Enter your choice \n 1: For Adding person \n 2:For Editing person's details \n 3:For Deleting person's details \n 4:Display the result ");
+			System.out.println("Enter your choice \n 1: For Adding person \n 2:For Editing person's details \n 3:For Deleting person's details \n 4:Display");
 			mychoice = in.nextInt();
 			switch (mychoice)
 			{
 				case 1:
-					pd = getDataFromConsole();
+					abook.getDataFromConsole();
 					break;
 					
 				case 2:
 					System.out.println("Enter the person's First name : ");
 					String fName = in.next();
-					if(fName.equals(pd.firstname))
-						pd = editPersonDetails(pd);
-					else
+					ArrayList<PersonDetails> personlist = abook.a1;
+					for(int i=0; i<personlist.size();i++)
+					{
+						if(personlist.get(i).firstname.equals(fName))
+						{
+							
+							PersonDetails pds = personlist.get(i);
+							abook.editPersonDetails(pds);
+						}
 						System.out.println(fName + " First name is not valid ");
-					System.out.println(pd);
+					}
 					break;
 					
 				case 3:
 					System.out.println("Enter the person's First name : ");
 					String fName1 = in.next();
-					if(fName1.equals(pd.firstname))
-						pd = deletePersonDetails(pd);
-					else
+					ArrayList<PersonDetails> personlist1 = abook.a1;
+					for(int i=0; i<personlist1.size();i++)
+					{
+						if(personlist1.get(i).firstname.equals(fName1))
+						{
+							PersonDetails pds = personlist1.get(i);
+							abook.deletePersonDetails(pds);
+						}
 						System.out.println(fName1 + " First name is not valid ");
+					}
 					break;
 					
 				case 4:
-					System.out.println(pd);
+					System.out.println(abook.a1);
+					System.out.println();
 					break;
+					
 				default:
 					System.out.println("Invalid Input");
 			}
