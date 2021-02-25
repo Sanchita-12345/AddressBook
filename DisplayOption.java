@@ -1,66 +1,80 @@
 package pack2;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class DisplayOption {
 
-	public static void display()
-	{
-		PersonDetails persondetails = null;
-		AddressBook abook = new AddressBook();
-		int mychoice;
+	private String firstName, lastName, address, city, state, pin, phoneNumber;
+
+	public DisplayOption(String firstName, String lastName, String address, String city, String state, String pin,
+						 String phoneNumber) {
 		
-		 while(true)
-		 {
-			Scanner in = new Scanner(System.in);
-			System.out.println("Enter your choice \n 1: For Adding person \n 2:For Editing person's details \n 3:For Deleting person's details \n 4:Display");
-			mychoice = in.nextInt();
-			switch (mychoice)
-			{
-				case 1:
-					abook.getDataFromConsole();
-					break;
-					
-				case 2:
-					System.out.println("Enter the person's First name : ");
-					String fName = in.next();
-					ArrayList<PersonDetails> personlist = abook.a1;
-					for(int i=0; i<personlist.size();i++)
-					{
-						if(personlist.get(i).firstname.equals(fName))
-						{
-							
-							PersonDetails pds = personlist.get(i);
-							abook.editPersonDetails(pds);
-						}
-						System.out.println(fName + " First name is not valid ");
-					}
-					break;
-					
-				case 3:
-					System.out.println("Enter the person's First name : ");
-					String fName1 = in.next();
-					ArrayList<PersonDetails> personlist1 = abook.a1;
-					for(int i=0; i<personlist1.size();i++)
-					{
-						if(personlist1.get(i).firstname.equals(fName1))
-						{
-							PersonDetails pds = personlist1.get(i);
-							abook.deletePersonDetails(pds);
-						}
-						System.out.println(fName1 + " First name is not valid ");
-					}
-					break;
-					
-				case 4:
-					System.out.println(abook.a1);
-					System.out.println();
-					break;
-					
-				default:
-					System.out.println("Invalid Input");
-			}
-		}
+		setFirstName(firstName);
+		setLastName(lastName);
+		setAddress(address);
+		setCity(city);
+		setState(state);
+		setPin(pin);
+		setPhoneNumber(phoneNumber);
+	}
+	
+	public DisplayOption() {
+		
+	}
+	
+	//Getter and Setter methods
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getPin() {
+		return pin;
+	}
+
+	public void setPin(String pin) {
+		this.pin = pin;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 }
