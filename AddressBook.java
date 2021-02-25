@@ -11,21 +11,26 @@ public class AddressBook
 				
 		System.out.println("Enter the First name : ");
 		String firstname = in.next();
-		System.out.println("Enter the Last name : ");
-		String lastname = in.next();
-		System.out.println("Enter the Address : ");
-		String address = in.next();
-		System.out.println("Enter the City : ");
-		String city = in.next();
-		System.out.println("Enter the State : ");
-		String state = in.next();
-		System.out.println("Enter the Pin : ");
-		String pin = in.next();
-		System.out.println("Enter the contact number : ");
-		String phoneNumber = in.next();
+		if (checkDuplicate(firstname)) {
+            System.out.println("Person is already exist");
+        }
+		else {
+        	System.out.println("Enter the Last name : ");
+        	String lastname = in.next();
+        	System.out.println("Enter the Address : ");
+        	String address = in.next();
+        	System.out.println("Enter the City : ");
+        	String city = in.next();
+        	System.out.println("Enter the State : ");
+        	String state = in.next();
+        	System.out.println("Enter the Pin : ");
+        	String pin = in.next();
+        	System.out.println("Enter the contact number : ");
+        	String phoneNumber = in.next();
 
-		DisplayOption pd = new DisplayOption(firstname, lastname, address, city, state, pin, phoneNumber);
-		contactList.add(pd);
+        	DisplayOption pd = new DisplayOption(firstname, lastname, address, city, state, pin, phoneNumber);
+        	contactList.add(pd);
+		}
 	}
 	
 	//Edit Person's Details
@@ -73,6 +78,23 @@ public class AddressBook
         }
         return flag == 1;
     }
+
+	//Check duplicate person's Details
+	 public boolean checkDuplicate(String name3)
+	    {
+	        int flag = 0;
+	        for (DisplayOption duplicateContact: contactList)
+	        {
+	            if (duplicateContact.getFirstName().equals(name3))
+	            {
+	                flag = 1;
+	                break;
+	            }
+	        }
+	        return flag == 1;
+	    }
+	 
+	//Display person's Details
 	public void display() {
   		for (DisplayOption person : contactList)				
   			System.out.println(person);
