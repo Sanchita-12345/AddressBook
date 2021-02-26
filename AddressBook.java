@@ -1,5 +1,6 @@
 package pack2;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class AddressBook
 {
@@ -41,7 +42,7 @@ public class AddressBook
 		{
 			if(contact.getFirstName().equals(name1))
 			{
-				
+				Scanner in = new Scanner(System.in);
 				System.out.println("Enter the Address : ");
 				String address = in.next();
 				contact.setAddress(address);
@@ -78,25 +79,40 @@ public class AddressBook
         }
         return flag == 1;
     }
-
-	//Check duplicate person's Details
+	
+	//check duplicate person's Details
 	 public boolean checkDuplicate(String name3)
-	    {
-	        int flag = 0;
-	        for (DisplayOption duplicateContact: contactList)
-	        {
-	            if (duplicateContact.getFirstName().equals(name3))
-	            {
-	                flag = 1;
-	                break;
-	            }
-	        }
-	        return flag == 1;
-	    }
+	 {
+	     int flag = 0;
+	     for (DisplayOption duplicateContact: contactList)
+	     {
+	         if (duplicateContact.getFirstName().equals(name3))
+	         {
+	             flag = 1;
+	             break;
+	         }
+	     }
+	     return flag == 1;
+    }
 	 
-	//Display person's Details
-	public void display() {
-  		for (DisplayOption person : contactList)				
-  			System.out.println(person);
+	 //get person's name by state
+	 public void getPersonNameByState(String State) 
+	 {
+		List<DisplayOption> list = contactList.stream().filter(contactName -> contactName.getState().equals(State))
+								   .collect(Collectors.toList());
+		for (DisplayOption contact : list) {
+			System.out.println("First Name: " + contact.getFirstName());
+			System.out.println("Last Name: " + contact.getLastName());
+		}
+	}
+
+	 //get person's name by city
+	public void getPersonNameByCity(String cityName) {
+		List<DisplayOption> list = contactList.stream().filter(contactName -> contactName.getCity().equals(cityName))
+								   .collect(Collectors.toList());
+		for (DisplayOption contact : list) {
+			System.out.println("First Name: " + contact.getFirstName());
+			System.out.println("Last Name: " + contact.getLastName());
+		}
 	}
 }

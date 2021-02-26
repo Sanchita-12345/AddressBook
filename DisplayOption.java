@@ -77,4 +77,11 @@ public class DisplayOption {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	
+	//to string method
+		@Override
+		public String toString() {
+			return "DisplayOption [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", city="
+					+ city + ", state=" + state  + ", pin=" + pin + ", phoneNumber=" + phoneNumber + "]";
+		}
 }

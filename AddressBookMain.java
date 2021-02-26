@@ -20,7 +20,6 @@ class AddressBookMain {
     		{
             	case 1:
             		addressBook.addPersonDetails();
-                    addressBook.display();
                 break;
 
             	case 2:
@@ -33,7 +32,6 @@ class AddressBookMain {
             		else {
             			System.out.println("List Cannot be Edited");
             		}
-            		addressBook.display();
             		break;
 
             	case 3:
@@ -46,7 +44,6 @@ class AddressBookMain {
             		else {
             			System.out.println("List Cannot be Deleted");
             		}
-            		addressBook.display();
             		break;
 
             	case 4:
@@ -54,7 +51,24 @@ class AddressBookMain {
             		break;
     		}
         }
+    	addressBookListMap.put(addName, addressBook);
     }
+    
+    private void searchPersonByState(String stateName) {
+		for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
+			AddressBook value = entry.getValue();
+			System.out.println("The Address Book: " + entry.getKey());
+			value.getPersonNameByState(stateName);
+		}
+	}
+
+	private void searchPersonByCity(String cityName) {
+		for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
+			AddressBook value = entry.getValue();
+			System.out.println("The Address Book: " + entry.getKey());
+			value.getPersonNameByCity(cityName);
+		}
+	}
     
     public static void main(String[] args) {
         
@@ -62,27 +76,42 @@ class AddressBookMain {
         boolean flag = true;
         while(flag)
         {
-            System.out.println("Enter your choice \n 1: Add new AddressBook \n 2:Display");
-            int choice = in.nextInt();
-            switch (choice){
-                case 1: {
-                    System.out.println("Enter the Name of Address Book: ");
-                    String addressBookName = in.next();
-                    if(addressBookMainobj.addressBookListMap.containsKey(addressBookName)){
-                        System.out.println("The Address book Already Exists");
-                        break;
-                    }
-                    else 
-                    {
-                        addressBookMainobj.addContactInAddressBook(addressBookName);
-                        break;
-                    }
-                }
-                case 2:{
-                    flag = false;
-                    break;
-                }
-            }
-        }
+        	while(flag)
+        	{
+        		System.out.println("Enter your choice \n 1: Add new AddressBook \n 2:Display");
+        		int choice = in.nextInt();
+        		switch (choice){
+                	case 1: {
+                		System.out.println("Enter the Name of Address Book: ");
+                		String addressBookName = in.next();
+                		if(addressBookMainobj.addressBookListMap.containsKey(addressBookName)){
+                			System.out.println("The Address book Already Exists");
+                			break;
+                		}
+                		else 
+                		{
+                			addressBookMainobj.addContactInAddressBook(addressBookName);
+                			break;
+                		}
+                	}
+                	case 2:
+    					System.out.println("Enter Name of City: ");
+    					String CityName = in.next();
+    					addressBookMainobj.searchPersonByCity(CityName);
+    					break;
+    					
+    				case 3: {
+    					System.out.println("Enter Name of State: ");
+    					String StateName = in.next();
+    					addressBookMainobj.searchPersonByState(StateName);
+    					break;
+    				}
+                	case 4:
+                		flag = false;
+                		break;
+                	
+        		}
+        	}
+       }
     }
 }
