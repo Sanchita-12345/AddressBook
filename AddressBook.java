@@ -5,10 +5,18 @@ import java.util.stream.Collectors;
 public class AddressBook
 {
 	public static Scanner in = new Scanner(System.in);
-	public ArrayList<DisplayOption> contactList = new  ArrayList<>();
+	public ArrayList<DisplayOption> contactList;
+	public HashMap<String, ArrayList<DisplayOption>> personByState;
+	public HashMap<String, ArrayList<DisplayOption>> personByCity;
+
+	public AddressBook() {
+		personByCity = new HashMap<String, ArrayList<DisplayOption>>();
+		personByState = new HashMap<String, ArrayList<DisplayOption>>();
+		contactList = new ArrayList<>();
+	}
 	
 	//Add contacts
-	public void addPersonDetails() {
+	public ArrayList<DisplayOption> addPersonDetails() {
 				
 		System.out.println("Enter the First name : ");
 		String firstname = in.next();
@@ -31,7 +39,17 @@ public class AddressBook
 
         	DisplayOption pd = new DisplayOption(firstname, lastname, address, city, state, pin, phoneNumber);
         	contactList.add(pd);
+        	if (!personByState.containsKey(state)) {
+				personByState.put(state, new ArrayList<DisplayOption>());
+			}
+			personByState.get(state).add(pd);
+
+			if (!personByCity.containsKey(city)) {
+				personByCity.put(city, new ArrayList<DisplayOption>());
+			}
+			personByCity.get(city).add(pd);
 		}
+		return contactList;
 	}
 	
 	//Edit Person's Details
