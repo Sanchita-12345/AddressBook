@@ -10,8 +10,8 @@ public class MenuOption {
         boolean flag = true;
         while(flag)
         {
-        	System.out.println("--Enter your choice--");
-        	System.out.println("1.Add New Address Book");
+	        	System.out.println("--Enter your choice--");
+   	     	System.out.println("1.Add New Address Book");
             System.out.println("2.Search Contact from a city");
             System.out.println("3.Search Contact from a State");
             System.out.println("4.View contact By State ");
@@ -20,8 +20,10 @@ public class MenuOption {
             System.out.println("7.Count Contact By City");
             System.out.println("8.Sort Contact By Name");
             System.out.println("9.Sort Contact By City");
-			System.out.println("10.Sort Contact By State");
-            System.out.println("11.Display");     
+				System.out.println("10.Sort Contact By State");
+				System.out.println("11.Write the data");
+				System.out.println("12.Read the data");
+            System.out.println("13.Display");     
             
             int choice = in.nextInt();
             
@@ -37,7 +39,7 @@ public class MenuOption {
                		{
                			addressBookMainobj.addContactInAddressBook(addressBookName);
                			break;
-              		}
+            	  		}
                	}
                	
                	case 2:
@@ -77,23 +79,34 @@ public class MenuOption {
     				break;
     				
     			case 8:
-                     System.out.println("Sort Contact");
-                     addressBookMainobj.sortContactByName();
-                     
+               System.out.println("Sort Contact by name");
+               addressBookMainobj.sortContactByName();
+               break;
+      
     			case 9:
-    				System.out.println("Sort Contact");
+    				System.out.println("Sort Contact by city");
     				addressBookMainobj.sortContactByCity();
     				break;
 
     			case 10:
-    				System.out.println("Sort Contact");
+    				System.out.println("Sort Contact by state");
     				addressBookMainobj.sortContactByState();
     				break;
                      
-             case 11:
-               flag = false;
-               break;
-             }
+    			case 11:
+    				System.out.println("Write the data");
+                    AddressBook.writeData(addressBookMainobj);
+                    break;
+                    
+                case 12:
+    				System.out.println("Read the data");
+                    AddressBook.readData(addressBookMainobj);
+                    break;
+    				
+               	case 13:
+                	flag = false;
+                	break;
+                }
         	}
     }
 }

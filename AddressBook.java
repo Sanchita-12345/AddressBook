@@ -1,11 +1,15 @@
 package pack2;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBook
 {
 	public static Scanner in = new Scanner(System.in);
-	public ArrayList<DisplayOption> contactList;
+	public static ArrayList<DisplayOption> contactList;
 	public HashMap<String, ArrayList<DisplayOption>> personByState;
 	public HashMap<String, ArrayList<DisplayOption>> personByCity;
 
@@ -133,4 +137,31 @@ public class AddressBook
 			System.out.println("Last Name: " + contact.getLastName());
 		}
 	}
+	
+	//File IO write operation
+    public static void writeData(AddressBookMain addressBookMainobj) {
+        StringBuffer personBuffer = new StringBuffer();
+        contactList.forEach(person -> {
+            String personDataString = person.toString().concat("\n");
+            personBuffer.append(personDataString);
+        });
+        try {
+            Files.write(Paths.get("Demo.txt"), personBuffer.toString().getBytes());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    //File IO read operation
+    public static void readData(AddressBookMain addressBookMainobj) {
+        try {
+            Files.lines(new File("Demo.txt").toPath()).map(String::trim).forEach(System.out::println);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
 }
